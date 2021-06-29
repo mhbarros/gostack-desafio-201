@@ -8,8 +8,12 @@ class CreateTransactionService {
     this.transactionsRepository = transactionsRepository;
   }
 
-  public execute(): Transaction {
-    // TODO
+  public execute({title, type, value}: Omit<Transaction, 'id'>): Transaction {
+    if(type !== 'income' && type !== 'outcome'){
+      throw new Error('Invalid type');
+    }
+
+    return this.transactionsRepository.create({title, type, value});
   }
 }
 

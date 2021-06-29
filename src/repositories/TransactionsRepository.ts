@@ -14,15 +14,18 @@ class TransactionsRepository {
   }
 
   public all(): Transaction[] {
-    // TODO
+    return this.transactions;
   }
 
   public getBalance(): Balance {
     // TODO
   }
 
-  public create(): Transaction {
-    // TODO
+  public create({ title, type, value }: Omit<Transaction, 'id'>): Transaction {
+    const newTransaction = new Transaction({title, value, type});
+    this.transactions.push(newTransaction);
+
+    return newTransaction;
   }
 }
 
